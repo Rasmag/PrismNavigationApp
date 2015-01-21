@@ -1,6 +1,8 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using NavigationApp.Infra;
+using NavigationApp.Infra.Navigation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -10,23 +12,17 @@ using System.Text;
 namespace NavigationApp.ModuleA
 {
 	[Export, PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
-	public class ViewModelA : BindableBase, INavigationAware
+	public class ViewModelA : BindableBase, INavigationAware, IWorkspaceViewModel
 	{
+		~ViewModelA()
+		{
+
+		}
 		public ViewModelA()
 		{
-
+			CloseCommand = new DelegateCommand(() => Close());
 		}
-		private string _name;
-
-		public string Name
-		{
-			get { return _name; }
-			set
-			{
-				_name = value;
-				OnPropertyChanged(() => Name);
-			}
-		}
+		public DelegateCommand CloseCommand { get; private set; }
 
 		public bool IsNavigationTarget(NavigationContext navigationContext)
 		{
@@ -40,8 +36,22 @@ namespace NavigationApp.ModuleA
 
 		public void OnNavigatedTo(NavigationContext navigationContext)
 		{
-			var workspaceView = navigationContext.Parameters["WorkspaceView"] as IWorkspaceView;
-			Name = workspaceView.Name;
+		}
+
+		public IWorkspaceView WorkspaceView
+		{
+			get;
+			set;
+		}
+		public Action Close
+		{
+			get;
+			set;
+		}
+
+		void IWorkspaceViewModel.OnClose()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

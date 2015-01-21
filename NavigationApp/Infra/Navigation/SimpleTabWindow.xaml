@@ -1,22 +1,27 @@
-﻿<Window
+﻿<dragablz:DragablzWindow
 	x:Class="NavigationApp.Infra.SimpleTabWindow"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	Title="SimpleTabWindow"
-	Height="300"
-	Width="300"
-	xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz">
+	Height="{Binding Path=WorkspaceViewGroup.Height, Mode=TwoWay}"
+	Width="{Binding Path=WorkspaceViewGroup.Width, Mode=TwoWay}"
+	Top="{Binding Path=WorkspaceViewGroup.Top, Mode=TwoWay}"
+	Left="{Binding Path=WorkspaceViewGroup.Left, Mode=TwoWay}"
+	xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+	Style="{StaticResource DragablzWindow1}">
 	<!--<TabControl
 		ItemsSource="{Binding Path=Views}"
 		SelectedItem="{Binding Path=CurrentView}"
 		IsSynchronizedWithCurrentItem="True"></TabControl>-->
 	<dragablz:TabablzControl
 		x:Name="tabablzControl"
-		ItemsSource="{Binding Path=Views}" ShowDefaultCloseButton="True">
+		ItemsSource="{Binding Path=Views}"
+		ShowDefaultCloseButton="True"
+		Style="{StaticResource TabablzControlStyle}">
 		<dragablz:TabablzControl.CustomHeaderItemTemplate>
 			<DataTemplate>
 				<TextBlock
-					Text="{Binding Path=DataContext.Name}"
+					Text="{Binding Path=DataContext.WorkspaceView.Name}"
 					MinWidth="50" />
 			</DataTemplate>
 		</dragablz:TabablzControl.CustomHeaderItemTemplate>
@@ -26,4 +31,4 @@
 				Partition="2AE89D18-F236-4D20-9605-6C03319038E6" />
 		</dragablz:TabablzControl.InterTabController>
 	</dragablz:TabablzControl>
-</Window>
+</dragablz:DragablzWindow>

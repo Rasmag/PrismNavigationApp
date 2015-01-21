@@ -7,7 +7,7 @@
 	Width="525"
 	xmlns:prism="http://www.codeplex.com/prism"
 	xmlns:local="clr-namespace:NavigationApp"
-	xmlns:infra="clr-namespace:NavigationApp.Infra"
+	xmlns:infra="clr-namespace:NavigationApp.Infra.Navigation"
 	infra:RegionBehaviors.WorkspaceRegion="{x:Static local:RegionNames.MainRegion}">
 	<Grid>
 		<DockPanel>

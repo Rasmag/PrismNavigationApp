@@ -1,4 +1,7 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.Regions;
+using NavigationApp.Infra;
+using NavigationApp.Infra.Navigation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -7,13 +10,15 @@ using System.Text;
 
 namespace NavigationApp.ModuleB
 {
+
 	[Export, PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
-	public class ViewModelB// : INavigationAware
+	public class ViewModelB : BindableBase, INavigationAware, IWorkspaceViewModel
 	{
+
 		~ViewModelB()
 		{
-
 		}
+
 		public bool KeepAlive
 		{
 			get { return false; }
@@ -30,6 +35,22 @@ namespace NavigationApp.ModuleB
 		}
 
 		public void OnNavigatedTo(NavigationContext navigationContext)
+		{
+
+		}
+		public IWorkspaceView WorkspaceView
+		{
+			get;
+			set;
+		}
+
+		public Action Close
+		{
+			get;
+			set;
+		}
+
+		public void OnClose()
 		{
 			
 		}
