@@ -1,5 +1,6 @@
 using System;
 using NavigationApp.Infra;
+using NavigationApp.Infra.ViewObjects;
 
 namespace NavigationApp.Infra.Navigation
 {

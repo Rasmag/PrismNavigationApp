@@ -1,12 +1,12 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
-using NavigationApp.Infra;
 using NavigationApp.Infra.Navigation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using NavigationApp.Infra.ViewObjects;
 
 namespace NavigationApp.ModuleB
 {

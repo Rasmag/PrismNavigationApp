@@ -15,25 +15,26 @@ using System.Windows;
 using System.Windows.Controls;
 using NavigationApp.Infra;
 using System.ComponentModel.Composition;
+using NavigationApp.Infra.ViewObjects;
 
 namespace NavigationApp.Infra.Navigation
 {
 
-	public class GetWorkspace : Microsoft.Practices.Prism.PubSubEvents.PubSubEvent<Action<Workspace>>
+	public class GetWorkspaceEvent : Microsoft.Practices.Prism.PubSubEvents.PubSubEvent<Action<Workspace>>
 	{
 	}
 
-	public class OpenWorkspace : Microsoft.Practices.Prism.PubSubEvents.PubSubEvent<Workspace>
-	{
-
-	}
-
-	public class CloseCurrentWorkspace : Microsoft.Practices.Prism.PubSubEvents.PubSubEvent<Action>
+	public class OpenWorkspaceEvent : Microsoft.Practices.Prism.PubSubEvents.PubSubEvent<Workspace>
 	{
 
 	}
 
-	[Export]
+	public class CloseCurrentWorkspaceEvent : Microsoft.Practices.Prism.PubSubEvents.PubSubEvent<Action>
+	{
+
+	}
+
+	[Export, PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.Shared)]
 	public class WorkspaceRegionBehavior : RegionBehavior, IHostAwareRegionBehavior
 	{
 		private IRegionManager _regionManager;
@@ -50,18 +51,18 @@ namespace NavigationApp.Infra.Navigation
 		public WorkspaceRegionBehavior(IEventAggregator eventAggregator, IRegionManager regionManager)
 		{
 			_regionManager = regionManager;
-			eventAggregator.GetEvent<GetWorkspace>().Subscribe(callback =>
+			eventAggregator.GetEvent<GetWorkspaceEvent>().Subscribe(callback =>
 			{
 				if (callback != null)
 					callback(GetWorkspace());
 			});
-			eventAggregator.GetEvent<CloseCurrentWorkspace>().Subscribe(callback =>
+			eventAggregator.GetEvent<CloseCurrentWorkspaceEvent>().Subscribe(callback =>
 			{
 				CloseWorkspace();
 				if (callback != null)
 					callback();
 			});
-			eventAggregator.GetEvent<OpenWorkspace>().Subscribe(OpenWorkspace);
+			eventAggregator.GetEvent<OpenWorkspaceEvent>().Subscribe(OpenWorkspace);
 			_tabClient = new InterTabClient(() =>
 			{
 				var window = GetNewWindow();

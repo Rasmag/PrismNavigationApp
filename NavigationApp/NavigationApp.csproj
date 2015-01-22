@@ -110,11 +110,16 @@
       <DependentUpon>SimpleTabWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infra\Navigation\WorkspaceRegionBehavior.cs" />
-    <Compile Include="Infra\Navigation\WorkspaceView.cs" />
+    <Compile Include="Infra\ViewObjects\IWorkspaceView.cs" />
+    <Compile Include="Infra\ViewObjects\Workspace.cs" />
+    <Compile Include="Infra\ViewObjects\WorkspaceViewBase.cs" />
+    <Compile Include="Infra\ViewObjects\WorkspaceViewGroup.cs" />
+    <Compile Include="ModuleA\MenuA.cs" />
     <Compile Include="ModuleA\ModuleA.cs" />
     <Compile Include="ModuleA\ViewA.xaml.cs">
       <DependentUpon>ViewA.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModuleA\ViewAWorkspaceView.cs" />
     <Compile Include="ModuleA\ViewModelA.cs" />
     <Compile Include="Infra\Navigation\IWorkspaceViewModel.cs" />
     <Compile Include="ModuleB\ModuleB.cs" />
